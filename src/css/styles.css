@@ -7,12 +7,138 @@
 /* Common styles */
 @import url('./reset.css');
 @import url('./base.css');
-@import url('./container.css');
-@import url('./animations.css');
 
-/* Sections style */
-@import url('./header.css');
-@import url('./vite-promo.css');
-@import url('./badges.css');
-@import url('./back-link.css');
-@import url('./footer.css');
+
+
+body {
+  font-family: sans-serif;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+  gap: 8px;
+}
+.input {
+border: 1px solid #808080;
+border-radius: 4px;
+width: 272px;
+background: #fff;
+padding: 8px 16px;
+line-height: 1.5;
+letter-spacing: 0.04em;
+}
+.input:hover {
+  border-color: #000000;
+}
+.input:focus {
+  border-color: #4E75FF;
+  outline: none;
+}
+
+.button {
+border-radius: 8px;
+padding-block: 8px;
+padding-inline: 16px;
+width: 91px;
+background: #4e75ff;
+color: #fff;
+border: none;
+font-size: 16px;
+}
+
+.button:hover {
+ background: #6c8cff;
+}
+.load-more {
+  display: block;
+  margin: 32px auto;
+  width: 125px;
+}
+
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  list-style: none;
+  width: 1176px;
+  margin: 0 auto;
+}
+
+.gallery-item {
+  width: 360px;
+  height: 200px;
+  border: 1px solid #808080;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.gallery img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.info {
+  font-size: 12px;
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  padding: 4px;
+  /* height: 48px; */
+  background: #f5f5f5;
+  box-sizing: border-box;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.loader {
+  width: 48px;
+  height: 48px;
+  display: inline-block;
+  position: relative;
+  border-width: 3px 2px 3px 2px;
+  border-style: solid dotted solid dotted;
+  border-color: #de3500 rgba(255, 255, 255, 0.3) #fff rgba(151, 107, 93, 0.3);
+  border-radius: 50%;
+  box-sizing: border-box;
+  animation: 1s rotate linear infinite;
+  margin: 0 auto;
+}
+
+.loader:before,
+.loader:after {
+  content: '';
+  top: 0;
+  left: 0;
+  position: absolute;
+  border: 10px solid transparent;
+  border-bottom-color: #fff;
+  transform: translate(-10px, 19px) rotate(-35deg);
+}
+
+.loader:after {
+  border-color: #de3500 #0000 #0000 #0000;
+  transform: translate(32px, 3px) rotate(-35deg);
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg)
+  }
+}
+
+.hidden {
+  display: none;
+}
