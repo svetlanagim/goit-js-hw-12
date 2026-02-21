@@ -77,26 +77,38 @@ async function handleSubmit(event) {
 // Обробник кнопки Load more
 loadMoreBtn.addEventListener('click', async () => {
   page++;
+
+  // Сховати кнопку одразу, щоб користувач не натискав її повторно
+  hideLoadMoreButton();
   showLoader();
 
   try {
     const data = await getImagesByQuery(currentQuery, page);
 
-    createGallery(data.hits);
-    smoothScroll();
-
-    // Кінець колекції
-    if (page * PER_PAGE >= totalHits) {
-      hideLoadMoreButton();
+    if (!data.hits || data.hits.length === 0) {
       iziToast.info({
         message: "We're sorry, but you've reached the end of search results.",
         position: 'topRight',
       });
-    } else {
-      showLoadMoreButton();
+      return;
     }
-  } catch {
-    iziToast.error({ message: 'Error loading images', position: 'topRight', });
+
+    createGallery(data.hits);
+    smoothScroll();
+
+    const loadedSoFar = page * PER_PAGE;
+
+    if (loadedSoFar < totalHits) {
+      // якщо ще є що завантажувати, показуємо кнопку знову
+      showLoadMoreButton();
+    } else {
+      iziToast.info({
+        message: "We're sorry, but you've reached the end of search results.",
+        position: 'topRight',
+      });
+    }
+  } catch (error) {
+    iziToast.error({ message: 'Error loading images', position: 'topRight' });
   } finally {
     hideLoader();
   }
